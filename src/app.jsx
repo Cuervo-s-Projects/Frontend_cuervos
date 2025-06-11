@@ -1,12 +1,12 @@
-import LoginForm from './components/LoginForm';
-
+import './App.css'
+import LoginForm from './LoginForm';
 function App() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>EducaRural - Login</h1>
+    <div>
+      <h1>Bienvenido a mi app</h1>
       <LoginForm />
     </div>
   );
 }
 
-export default App;
+export default App
