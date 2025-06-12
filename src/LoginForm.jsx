@@ -1,47 +1,48 @@
+// src/components/LoginForm.jsx
+// Antes de correr el programa, instalar:
+// npm install axios
+
 import { useState } from 'react';
 import axios from 'axios';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('✔ handleSubmit ejecutado');
+    setMessage('');
 
-    setMessage('Enviando...');
-    try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
-        email,
+    try{
+      const res = await axios.post(`http://127.0.0.1:5000/api/login`, {
+        username,
         password,
       });
-      console.log('Respuesta:', res.data);
+      localStorage.setItem('token', res.data.access_token);
+      console.log(res.data.access_token)
       setMessage('✅ Login exitoso');
-    } catch (err) {
-      console.error(err);
-      setMessage('❌ Error en login');
-    }
-  };
+    }catch (err) {
+      setMessage('❌ Credenciales inválidas');
+    }   
+  }
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2>Iniciar Sesión</h2>
       <input
-        type="email"
-        value={email}
+        type="text"
         placeholder="Correo"
-        onChange={(e) => setEmail(e.target.value)}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       /><br />
       <input
         type="password"
-        value={password}
         placeholder="Contraseña"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
       /><br />
-      <button type="submit">Ingresar</button>
-      <p>{message}</p>
+      <input type="submit" />
     </form>
-  );
+  )
 }
-  
