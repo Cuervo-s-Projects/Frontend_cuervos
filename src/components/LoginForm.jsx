@@ -29,7 +29,6 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Iniciar Sesión</h2>
       <input
         type="text"
         placeholder="Correo"
@@ -42,7 +41,8 @@ export default function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       /><br />
-      <input type="submit" />
+          <input type="submit" />
+          {message && <p>{message}</p>}
     </form>
   )
 }

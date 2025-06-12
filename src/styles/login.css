@@ -1,0 +1,29 @@
+.login-page {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.login-form label {
+    display: block;
+    margin-top: 1rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.login-form button {
+    margin-top: 1.5rem;
+    padding: 0.7rem;
+    width: 100%;
+    background-color: #2c5cd6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

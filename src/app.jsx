@@ -1,12 +1,7 @@
-import './App.css'
-import LoginForm from './LoginForm';
+import LoginPage from './pages/LoginPage';
+
 function App() {
-  return (
-    <div>
-      <h1>Bienvenido a mi app</h1>
-      <LoginForm />
-    </div>
-  );
+    return <LoginPage />;
 }
 
 export default App
