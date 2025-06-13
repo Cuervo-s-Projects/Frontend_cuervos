@@ -4,7 +4,7 @@ import '../styles/login.css';
 function LoginPage() {
     return (
         <div className="login-page">
-            <h2>Iniciar Sesión</h2>
+            <h1>Iniciar SesiÃ³n</h1>
             <LoginForm />
         </div>
     );

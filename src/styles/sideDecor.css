@@ -1,0 +1,18 @@
+.side-decor {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 35vh; /* Puedes ajustar el tamaño */
+    width: auto;
+    z-index: 0; /* Asegura que esté detrás del contenido */
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.side-decor.left {
+    left: 2rem; /* Separación del borde izquierdo */
+}
+
+.side-decor.right {
+    right: 2rem; /* Separación del borde derecho */
+}

@@ -1,0 +1,33 @@
+.video-grid {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* auto-fit permite que las columnas se llenen automáticamente según el espacio */
+}
+
+.video-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+    transform: scale(1.03);
+}
+
+.thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.video-title {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    color: #333;
+}

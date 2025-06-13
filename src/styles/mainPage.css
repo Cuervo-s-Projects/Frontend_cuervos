@@ -1,0 +1,24 @@
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #f0f8ff;
+    min-height: 100vh;
+    margin: 0 auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.main-page h1 {
+    color: #3b3b98;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.main-page p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 600px;
+}
