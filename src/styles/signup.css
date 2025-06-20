@@ -6,6 +6,7 @@
     background-color: #fff5e6;
     min-height: 100vh;
     font-family: 'Verdana', sans-serif;
+    padding-top: 80px; /* ajusta según la altura real de la barra */
 }
 
     .signup-page h2 {

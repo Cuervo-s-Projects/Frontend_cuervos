@@ -4,6 +4,7 @@
     padding: 2rem;
     text-align: center;
     font-family: Arial, sans-serif;
+    padding-top: 80px; /* ajusta según la altura real de la barra */
 }
 
 .upload-page h1 {

@@ -9,12 +9,14 @@
     background-color: #f7f7f7;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
 }
 
 .login-page h1 {
     text-align: center;
     margin-bottom: 1rem;
     font-size: 2rem;
+    padding-top: 80px; /* ajusta según la altura real de la barra */
 }
 
 .login-input {
