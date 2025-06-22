@@ -61,7 +61,7 @@
 }
 
 .btn {
-    background-color: #1865f2;
+    background-color: #4baf58;
     color: white;
     padding: 0.5rem 1.4rem;
     border: none;
@@ -72,7 +72,7 @@
 }
 
     .btn:hover {
-        background-color: #1147a9;
+        background-color: #4c724c;
     }
 
 @media (max-width: 768px) {

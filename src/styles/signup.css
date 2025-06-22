@@ -1,53 +1,62 @@
 .signup-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+  font-family: 'Verdana', sans-serif;
+  padding-top: 80px;
+}
+
+.signup-page h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    padding-top: 80px; /* ajusta segï¿½n la altura real de la barra */
+}
+
+.signup-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    max-width: 300px;
+    margin: 0 auto;
     padding: 2rem;
-    background-color: #fff5e6;
-    min-height: 100vh;
-    font-family: 'Verdana', sans-serif;
-    padding-top: 80px; /* ajusta según la altura real de la barra */
+    background-color: #f7f7f7;
+    border: 2px solid #324e3825; /* Borde verde */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-    .signup-page h2 {
-        color: #ff9900;
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-form {
-    background-color: white;
-    border: 2px solid #ffe0b2;
-    padding: 1.5rem;
-    border-radius: 10px;
+.signup-input {
     width: 100%;
-    max-width: 350px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    padding: 0.8rem;
+    border: 1px solid #6eaf71;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
-    form input[type="email"],
-    form input[type="password"] {
-        width: 100%;
-        padding: 0.5rem;
-        margin: 0.5rem 0 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+.signup-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #70c065; /* Azul mentor */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    form input[type="submit"] {
-        background-color: #ffcc66;
-        border: none;
-        padding: 0.6rem 1.2rem;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+.signup-button:hover {
+  background-color: #4a7c45;
+}
 
-        form input[type="submit"]:hover {
-            background-color: #ffb84d;
-        }
-
-    form p {
-        margin-top: 1rem;
-        font-weight: bold;
-    }
+.signup-message {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}

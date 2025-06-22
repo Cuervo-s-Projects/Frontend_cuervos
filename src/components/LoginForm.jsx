@@ -5,8 +5,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 import '../styles/login.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -26,13 +28,14 @@ export default function LoginForm() {
         console.log(res.data.access_token)
         setEmail('')
         setPassword('')
-        setMessage('✅ Login exitoso');
+        setMessage('Login exitoso');
+        navigate('/');
       }else{
         console.log("Credenciales inválidas")
-        setMessage("❌ Credenciales inválidas")
+        setMessage("Credenciales inválidas")
       }
     }catch (err) {
-      setMessage('❌ Credenciales inválidas');
+      setMessage('Credenciales inválidas');
     }   
   }
 
@@ -54,7 +57,13 @@ export default function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button className="login-button" type="submit">Iniciar Sesión</button>
+      <button
+        className="login-button"
+        type="submit"
+        style={{ backgroundColor: '#28a745', borderColor: '#28a745', color: '#fff' }}
+      >
+        Iniciar Sesión
+      </button>
       {message && <p className="login-message">{message}</p>}
     </form>
   );
