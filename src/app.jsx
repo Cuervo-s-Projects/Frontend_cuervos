@@ -1,12 +1,22 @@
-import LoginForm from './components/LoginForm';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import UploadPage from './pages/UploadPage';
+
+
 
 function App() {
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h1>EducaRural - Login</h1>
-      <LoginForm />
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/upload" element={<UploadPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
-export default App;
+export default App

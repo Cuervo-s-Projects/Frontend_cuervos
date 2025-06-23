@@ -4,8 +4,11 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import '../styles/login.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -13,38 +16,68 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    console.log('Formulario enviado');
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
+      const res = await axios.post(`http://127.0.0.1:5000/api/login`, {
         email,
         password,
       });
-      localStorage.setItem('token', res.data.token);
-      setMessage('✅ Login exitoso');
+
+      if (res.status === 200) {
+        localStorage.setItem('token', res.data.access_token);
+        console.log(res.data.access_token);
+        setEmail('');
+        setPassword('');
+        setMessage('Login exitoso');
+        navigate('/');
+      } else {
+        console.log("Credenciales inválidas");
+        setMessage("Credenciales inválidas");
+      }
     } catch (err) {
-      setMessage('❌ Credenciales inválidas');
+      setMessage('Credenciales inválidas');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Iniciar Sesión</h2>
+    <form className="login-form" onSubmit={handleSubmit}>
       <input
+        className="login-input"
         type="email"
         placeholder="Correo"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-      /><br />
+      />
       <input
+        className="login-input"
         type="password"
         placeholder="Contraseña"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-      /><br />
-      <button type="submit">Ingresar</button>
-      <p>{message}</p>
+      />
+      <button
+        className="login-button"
+        type="submit"
+        style={{ backgroundColor: '#28a745', borderColor: '#28a745', color: '#fff' }}
+      >
+        Iniciar Sesión
+      </button>
+
+      {message && (
+        <p
+          className="login-message"
+          style={{
+            color: message === 'Login exitoso' ? 'green' : 'red',
+            fontWeight: 'bold',
+            marginTop: '10px',
+          }}
+        >
+          {message === 'Login exitoso' ? '✅ Acceso exitoso' : `❌ ${message}`}
+        </p>
+      )}
     </form>
   );
 }
