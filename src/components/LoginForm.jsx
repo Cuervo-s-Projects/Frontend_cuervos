@@ -12,32 +12,33 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     console.log('Formulario enviado');
 
-    try{
+    try {
       const res = await axios.post(`http://127.0.0.1:5000/api/login`, {
         email,
         password,
       });
 
-      if (res.status === 200){
+      if (res.status === 200) {
         localStorage.setItem('token', res.data.access_token);
-        console.log(res.data.access_token)
-        setEmail('')
-        setPassword('')
+        console.log(res.data.access_token);
+        setEmail('');
+        setPassword('');
         setMessage('Login exitoso');
         navigate('/');
-      }else{
-        console.log("Credenciales inválidas")
-        setMessage("Credenciales inválidas")
+      } else {
+        console.log("Credenciales inválidas");
+        setMessage("Credenciales inválidas");
       }
-    }catch (err) {
+    } catch (err) {
       setMessage('Credenciales inválidas');
-    }   
-  }
+    }
+  };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
@@ -64,7 +65,19 @@ export default function LoginForm() {
       >
         Iniciar Sesión
       </button>
-      {message && <p className="login-message">{message}</p>}
+
+      {message && (
+        <p
+          className="login-message"
+          style={{
+            color: message === 'Login exitoso' ? 'green' : 'red',
+            fontWeight: 'bold',
+            marginTop: '10px',
+          }}
+        >
+          {message === 'Login exitoso' ? '✅ Acceso exitoso' : `❌ ${message}`}
+        </p>
+      )}
     </form>
   );
 }
