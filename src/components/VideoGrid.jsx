@@ -1,22 +1,47 @@
-// Description: Malla para los videos
+// src/components/VideoGrid.jsx
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import VideoCard from './VideoCard';
 import '../styles/videoGrid.css';
 
-// Simulación de videos (puedes reemplazar esto con una API real)
-const mockVideos = [
-    { title: 'Video 1', thumbnail: 'https://via.placeholder.com/320x180' },
-    { title: 'Video 2', thumbnail: 'https://via.placeholder.com/320x180' },
-    { title: 'Video 3', thumbnail: 'https://via.placeholder.com/320x180' },
-    { title: 'Video 4', thumbnail: 'https://via.placeholder.com/320x180' },
-    { title: 'Video 5', thumbnail: 'https://via.placeholder.com/320x180' },
-];
-
 export default function VideoGrid() {
-    return (
-        <div className="video-grid">
-            {mockVideos.map((video, index) => (
-                <VideoCard key={index} title={video.title} thumbnail={video.thumbnail} />
-            ))}
-        </div>
-    );
+  const [videos, setVideos] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch('http://localhost:5001/videos')
+      .then((res) => res.json())
+      .then((data) => {
+        setVideos((data.videos || []).slice(0, 20)); // Solo los primeros 20
+      })
+      .catch((err) => {
+        console.error('Error fetching videos:', err);
+      });
+  }, []);
+
+  const handleClick = (videoId) => {
+    navigate(`/video/${videoId}`);
+  };
+
+  return (
+    <div className="video-grid">
+      {videos.length > 0 ? (
+        videos.map((video) => (
+          <div
+            key={video.id}
+            className="video-card-wrapper"
+            onClick={() => handleClick(video.id)}
+            style={{ cursor: 'pointer' }}
+          >
+            <VideoCard
+              title={video.title}
+              thumbnailId={video.thumbnail_id}
+            />
+          </div>
+        ))
+      ) : (
+        <p>No hay videos disponibles.</p>
+      )}
+    </div>
+  );
 }

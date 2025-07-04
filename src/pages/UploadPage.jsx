@@ -1,24 +1,33 @@
-// src/pages/UploadPage.jsx
 import { useState } from 'react';
 import '../styles/upload.css';
 import UserTopMenu from '../components/UserTopMenu';
 
 export default function UploadPage() {
   const [videoTitle, setVideoTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
+  const [length, setLength] = useState('');
+const [userId, setUserId] = useState(localStorage.getItem('user_id') || 'ddelgadopi');
+
   const [videoFile, setVideoFile] = useState(null);
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!videoTitle || !videoFile) {
-      setMessage('Completa todos los campos');
+    if (!videoTitle || !description || !tags || !userId || !videoFile) {
+      setMessage('⚠️ Completa todos los campos');
       setTimeout(() => setMessage(''), 5000);
       return;
     }
 
     const formData = new FormData();
     formData.append('file', videoFile);
+    formData.append('title', videoTitle);
+    formData.append('description', description);
+    formData.append('tags', tags);
+    formData.append('length', length);
+    formData.append('user_id', userId);
 
     try {
       const response = await fetch('http://localhost:5001/upload', {
@@ -26,7 +35,7 @@ export default function UploadPage() {
         body: formData,
       });
 
-      const text = await response.text(); // Leer como texto para ver lo que llega realmente
+      const text = await response.text();
       console.log('Texto recibido:', text);
 
       let data = {};
@@ -42,8 +51,12 @@ export default function UploadPage() {
       if (response.ok) {
         console.log('ID del archivo subido:', data.file_id);
         setMessage('✅ Video subido correctamente');
-        setVideoFile(null);
         setVideoTitle('');
+        setDescription('');
+        setTags('');
+        setLength('');
+        setUserId('');
+        setVideoFile(null);
       } else {
         console.error('Respuesta del servidor con error:', data);
         setMessage('❌ Error al subir el video');
@@ -56,8 +69,6 @@ export default function UploadPage() {
       setTimeout(() => setMessage(''), 5000);
     }
   };
-
-
 
   return (
     <>
@@ -82,7 +93,27 @@ export default function UploadPage() {
                       value={videoTitle}
                       onChange={(e) => setVideoTitle(e.target.value)}
                       className="upload-input"
+                      required
                     />
+
+                    <textarea
+                      placeholder="Descripción"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className="upload-input"
+                      required
+                    />
+
+                    <input
+                      type="text"
+                      placeholder="Etiquetas (separadas por coma)"
+                      value={tags}
+                      onChange={(e) => setTags(e.target.value)}
+                      className="upload-input"
+                      required
+                    />
+
+                    <input type="hidden" value={userId} name="user_id" />
 
                     <div className="file-upload-wrapper d-flex align-items-center gap-3">
                       <label htmlFor="file-upload" className="btn btn-success mb-0">
@@ -94,13 +125,17 @@ export default function UploadPage() {
                         accept="video/*"
                         onChange={(e) => setVideoFile(e.target.files[0])}
                         style={{ display: 'none' }}
+                        required
                       />
                       <span className="text-muted">
                         {videoFile ? `🎥 ${videoFile.name}` : 'Ningún archivo seleccionado'}
                       </span>
                     </div>
 
-                    <button type="submit" className="upload-button">Subir</button>
+                    <button type="submit" className="upload-button">
+                      Subir
+                    </button>
+
                     {message && (
                       <p
                         className="upload-message"
