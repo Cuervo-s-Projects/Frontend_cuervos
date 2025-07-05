@@ -5,20 +5,49 @@ import UserTopMenu from '../components/UserTopMenu';
 export default function VideoPage() {
   const { id } = useParams();
   const [video, setVideo] = useState(null);
+  const [uploader, setUploader] = useState('');
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/videos/${id}`)
-      .then(res => res.json())
-      .then(data => setVideo(data))
-      .catch(err => console.error('Error al cargar video:', err));
+    const fetchVideoAndUploader = async () => {
+      try {
+        // Obtener el video por su ID
+        const res = await fetch(`http://localhost:5001/videos/${id}`);
+        const data = await res.json();
+        setVideo(data);
 
-    fetch(`http://localhost:5001/videos`)
-      .then(res => res.json())
-      .then(data => setRelatedVideos(data.videos.slice(0, 10)))
-      .catch(err => console.error('Error al cargar videos relacionados:', err));
+        // Buscar el nombre de usuario usando el user_id del video
+        if (data.user_id) {
+          const userRes = await fetch('http://localhost:5000/api/username', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: data.user_id }),
+          });
+
+          if (userRes.ok) {
+            const userData = await userRes.json();
+            setUploader(userData.username || 'Usuario desconocido');
+          } else {
+            setUploader('Usuario desconocido');
+          }
+        }
+
+        // Buscar videos relacionados por título y etiquetas
+        const searchTerms = [data.title, ...(data.tags || [])].join(' ');
+        const searchRes = await fetch(`http://localhost:5001/videos/search?q=${encodeURIComponent(searchTerms)}`);
+        const searchData = await searchRes.json();
+        const related = searchData.videos
+          .filter(v => v._id !== id)
+          .slice(0, 10);
+        setRelatedVideos(related);
+      } catch (err) {
+        console.error('Error al cargar video o usuario:', err);
+      }
+    };
+
+    fetchVideoAndUploader();
   }, [id]);
 
   const handleCommentSubmit = (e) => {
@@ -44,8 +73,9 @@ export default function VideoPage() {
           </video>
         </div>
 
-        {/* Título y descripción */}
+        {/* Título, autor y descripción */}
         <h2 className="fw-bold text-success">{video.title}</h2>
+        <p className="text-muted mb-1"><strong>Subido por:</strong> {uploader}</p>
         <p className="text-muted">{video.description}</p>
 
         {/* Botones de formularios */}

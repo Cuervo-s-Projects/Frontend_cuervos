@@ -1,4 +1,3 @@
-// src/components/VideoGrid.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VideoCard from './VideoCard';
@@ -12,7 +11,7 @@ export default function VideoGrid() {
     fetch('http://localhost:5001/videos')
       .then((res) => res.json())
       .then((data) => {
-        setVideos((data.videos || []).slice(0, 20)); // Solo los primeros 20
+        setVideos((data.videos || []).slice(0, 20));
       })
       .catch((err) => {
         console.error('Error fetching videos:', err);
@@ -28,15 +27,12 @@ export default function VideoGrid() {
       {videos.length > 0 ? (
         videos.map((video) => (
           <div
-            key={video.id}
+            key={video._id}
             className="video-card-wrapper"
-            onClick={() => handleClick(video.id)}
+            onClick={() => handleClick(video._id)}
             style={{ cursor: 'pointer' }}
           >
-            <VideoCard
-              title={video.title}
-              thumbnailId={video.thumbnail_id}
-            />
+            <VideoCard title={video.title} thumbnailId={video.thumbnail_id} />
           </div>
         ))
       ) : (

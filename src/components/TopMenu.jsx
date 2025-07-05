@@ -1,6 +1,7 @@
 import '../styles/topMenu.css';
 import logo from '../assets/smart_crow.png';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 function TopMenu() {
   const isLoggedIn = !!localStorage.getItem('token'); // true si el token existe
@@ -27,6 +28,7 @@ function TopMenu() {
         </button>
 
         <div className="collapse navbar-collapse justify-content-end" id="navbarContent">
+          <SearchBar />
           <ul className="navbar-nav gap-3 align-items-center">
             <li className="nav-item">
               <Link to="/" className="nav-link text-dark fw-semibold">Inicio</Link>
