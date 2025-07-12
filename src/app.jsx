@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage';
 import UploadPage from './pages/UploadPage';
 import VideoPage from './pages/VideoPage';
 import SearchResultsPage from './pages/SearchResultsPage';
+import QuizPage from './pages/QuizPage';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/upload" element={<UploadPage />} />
                 <Route path="/video/:id" element={<VideoPage />} />
                 <Route path="/search" element={<SearchResultsPage />} />
+                <Route path="/quiz" element={<QuizPage />} />
             </Routes>
         </Router>
     );
