@@ -1,7 +1,3 @@
-// src/components/LoginForm.jsx
-// Antes de correr el programa, instalar:
-// npm install axios
-
 import { useState } from 'react';
 import axios from 'axios';
 import '../styles/login.css';
@@ -25,17 +21,35 @@ export default function LoginForm() {
       });
 
       if (res.status === 200) {
-        localStorage.setItem('token', res.data.access_token);
-        console.log(res.data.access_token);
+        const token = res.data.access_token;
+        localStorage.setItem('token', token);
+        console.log('Token:', token);
+
+        // 🔥 Nueva llamada a /profile para obtener el user_id
+        const profileRes = await axios.get('http://127.0.0.1:5000/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (profileRes.status === 200) {
+          const userId = profileRes.data._id;
+          localStorage.setItem('user_id', userId);
+          console.log('user_id:', userId);
+        } else {
+          console.warn('No se pudo obtener el perfil');
+        }
+
         setEmail('');
         setPassword('');
         setMessage('Login exitoso');
         navigate('/');
       } else {
-        console.log("Credenciales inválidas");
-        setMessage("Credenciales inválidas");
+        console.log('Credenciales inválidas');
+        setMessage('Credenciales inválidas');
       }
     } catch (err) {
+      console.error('Error en login:', err);
       setMessage('Credenciales inválidas');
     }
   };
@@ -75,7 +89,7 @@ export default function LoginForm() {
             marginTop: '10px',
           }}
         >
-          {message === 'Login exitoso' ? '✅ Acceso exitoso' : `❌ ${message}`}
+          {message === 'Login exitoso' ? '✅ Acceso exitoso' : `${message}`}
         </p>
       )}
     </form>

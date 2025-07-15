@@ -6,6 +6,7 @@ import UploadPage from './pages/UploadPage';
 import VideoPage from './pages/VideoPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import QuizPage from './pages/QuizPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/video/:id" element={<VideoPage />} />
                 <Route path="/search" element={<SearchResultsPage />} />
                 <Route path="/quiz/:id" element={<QuizPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
             </Routes>
         </Router>
     );

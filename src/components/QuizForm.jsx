@@ -12,7 +12,7 @@ function QuizForm({ quizData, onSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Aquí se pasa como ["a", "c", "b"]
+        // AquÃ­ se pasa como ["a", "c", "b"]
         onSubmit(answers);
     };
 
