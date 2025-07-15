@@ -40,9 +40,9 @@ export default function LoginAndUploadPage() {
 
       localStorage.setItem('user_id', profileData._id);
       setUserId(profileData._id);
-      setMessage('✅ Login exitoso y perfil cargado');
+      setMessage('Login exitoso y perfil cargado');
     } catch (err) {
-      setMessage(`❌ ${err.message}`);
+      setMessage(`${err.message}`);
     }
   };
 
@@ -51,7 +51,7 @@ export default function LoginAndUploadPage() {
     e.preventDefault();
 
     if (!videoTitle || !description || !tags || !userId || !videoFile) {
-      setMessage('⚠️ Completa todos los campos');
+      setMessage('Completa todos los campos');
       setTimeout(() => setMessage(''), 5000);
       return;
     }
@@ -79,12 +79,12 @@ export default function LoginAndUploadPage() {
         data = JSON.parse(text);
       } catch (err) {
         console.error('Error al parsear JSON:', err);
-        setMessage('⚠️ Error al interpretar respuesta del servidor');
+        setMessage('Error al interpretar respuesta del servidor');
         return;
       }
 
       if (response.ok) {
-        setMessage('✅ Video subido correctamente');
+        setMessage('Video subido correctamente');
         setVideoTitle('');
         setDescription('');
         setTags('');
@@ -92,11 +92,11 @@ export default function LoginAndUploadPage() {
         setVideoFile(null);
       } else {
         console.error('Respuesta con error:', data);
-        setMessage('❌ Error al subir el video');
+        setMessage('Error al subir el video');
       }
     } catch (error) {
       console.error('Error de conexión:', error);
-      setMessage('❌ Error de conexión al subir el video');
+      setMessage('Error de conexión al subir el video');
     } finally {
       setIsUploading(false);
       setTimeout(() => setMessage(''), 5000);
@@ -222,7 +222,7 @@ export default function LoginAndUploadPage() {
                         <p
                           className="upload-message"
                           style={{
-                            color: message.startsWith('✅') ? 'green' : 'red',
+                            color: message.startsWith('Video subido') ? 'green' : 'red',
                             fontWeight: 'bold',
                             marginTop: '10px',
                           }}

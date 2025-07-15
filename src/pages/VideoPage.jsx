@@ -73,6 +73,17 @@ export default function VideoPage() {
           </video>
         </div>
 
+        {/* Botón de descarga */}
+        <div className="mb-4">
+          <a
+            href={`http://localhost:5001/download/${video.file_id}`}
+            download={video.filename}
+            className="btn btn-outline-secondary"
+          >
+            Descargar video
+          </a>
+        </div>
+
         {/* Título, autor y descripción */}
         <h2 className="fw-bold text-success">{video.title}</h2>
         <p className="text-muted mb-1"><strong>Subido por:</strong> {uploader}</p>
@@ -81,7 +92,7 @@ export default function VideoPage() {
         {/* Botones de formularios */}
         <div className="mb-4 d-flex gap-3">
           <button className="btn btn-outline-primary">📄 Crear Formulario</button>
-          <button className="btn btn-outline-success">✅ Resolver Formulario</button>
+          <a href="/quiz" className="btn btn-success btn-lg mt-3">Resolver formulario</a>
         </div>
 
         {/* Comentarios */}
