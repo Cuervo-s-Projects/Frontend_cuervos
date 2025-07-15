@@ -13,7 +13,7 @@ function QuizPage() {
         const fetchQuiz = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/quiz/${id}`, {
+                const response = await axios.get(`http://localhost:5002/api/class/quiz/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

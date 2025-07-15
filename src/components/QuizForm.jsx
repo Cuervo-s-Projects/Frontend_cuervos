@@ -21,7 +21,7 @@ function QuizForm({ quizData, onResult }) {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`${import.meta.env.VITE_API_URL}/assess`, {
+            await axios.post(`http://localhost:5002/api/class/assess`, {
                 quiz_id: quizData.quiz_id,
                 reply
             }, {

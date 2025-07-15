@@ -21,7 +21,7 @@ function MainPage() {
           </p>
           <a href="/search" className="btn btn-success btn-lg mt-3">Explorar</a>
           <a href="/quiz/1" className="btn btn-success btn-lg mt-3">Quiz Mock</a>
-          <a href="/quiz/2" className="btn btn-success btn-lg mt-3">Quiz Mock 2</a>
+          <a href="/create-quiz" className="btn btn-success btn-lg mt-3">Quiz Creator</a>
         </div>
       </section>
 
