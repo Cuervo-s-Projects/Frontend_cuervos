@@ -20,7 +20,6 @@ function MainPage() {
             Explora videos educativos, cuentos mágicos y juegos divertidos.
           </p>
           <a href="/search" className="btn btn-success btn-lg mt-3">Explorar</a>
-          <a href="/quiz" className="btn btn-success btn-lg mt-3">Quiz Mock</a>
         </div>
       </section>
 
