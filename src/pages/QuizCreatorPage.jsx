@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import axios from 'axios';
 
 function QuizCreatorPage() {
@@ -29,6 +29,7 @@ function QuizCreatorPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
+
         try {
             await axios.post('http://localhost:5002/api/class/create', {
                 title,
@@ -42,8 +43,13 @@ function QuizCreatorPage() {
             setTitle('');
             setQuestions([]);
         } catch (error) {
-            console.error('Error al crear el quiz:', error);
-            alert('Hubo un error al crear el quiz');
+            console.error('Error completo:', error);
+            console.error('Response status:', error.response?.status);
+            console.error('Response data:', error.response?.data);  // ← Este es el más importante
+            console.error('Response headers:', error.response?.headers);
+
+            const errorMessage = error.response?.data?.message || 'Hubo un error al crear el quiz';
+            alert(errorMessage);
         }
     };
 
