@@ -131,7 +131,7 @@ function QuizCreatorPage() {
                                     <label className="form-label">Respuesta Correcta</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className="form-control correct"
                                         value={q.correct}
                                         onChange={(e) => handleQuestionChange(qIndex, 'correct', e.target.value)}
                                         required
