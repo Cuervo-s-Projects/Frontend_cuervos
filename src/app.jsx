@@ -7,6 +7,7 @@ import VideoPage from './pages/VideoPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import QuizPage from './pages/QuizPage';
 import ProfilePage from './pages/ProfilePage';
+import FormCreatePage from './pages/FormCreatePage';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/search" element={<SearchResultsPage />} />
                 <Route path="/quiz" element={<QuizPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/quiz/create/:videoId" element={<FormCreatePage />} />
             </Routes>
         </Router>
     );
