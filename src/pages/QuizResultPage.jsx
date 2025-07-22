@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import UserTopMenu from '../components/UserTopMenu';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import UserTopMenu from '../components/UserTopMenu';
 import { Container, Card, Button, Alert, Spinner } from 'react-bootstrap';
 
 const QuizResultPage = () => {
@@ -10,6 +11,9 @@ const QuizResultPage = () => {
   const [quizTitle, setQuizTitle] = useState('');
   const [error, setError] = useState('');
   const [videoId, setVideoId] = useState('');
+  const [score, setScore] = useState(0);
+  const [maxScore, setMaxScore] = useState(0);
+
   const navigate = useNavigate();
 
   const API_URL =
@@ -34,9 +38,19 @@ const QuizResultPage = () => {
         console.log('Respuesta completa del backend:', response.data);
 
         if (quizResponse) {
-          setResults(quizResponse.results);
+          const resultList = quizResponse.results;
+          setResults(resultList);
           setQuizTitle(quizResponse.quiz_id?.title || 'Resultados del cuestionario');
           setVideoId(quizResponse.quiz_id?.video_id || '');
+
+          // Calcular puntaje
+          const total = resultList.reduce((acc, item) => acc + (item.value || 1), 0);
+          const scored = resultList.reduce(
+            (acc, item) => acc + ((item.result && item.value) || 0),
+            0
+          );
+          setScore(scored);
+          setMaxScore(total);
         } else {
           setError('No se encontraron resultados para este cuestionario.');
         }
@@ -74,35 +88,42 @@ const QuizResultPage = () => {
             {error}
           </Alert>
         ) : (
-          results.map((item, index) => (
-            <Card
-              key={index}
-              className={`mb-3 border ${
-                item.result ? 'border-success' : 'border-danger'
-              }`}
-            >
-              <Card.Body>
-                <Card.Title>
-                  Pregunta {index + 1}: {item.question}
-                </Card.Title>
-                <Card.Text>
-                  <strong>Tu respuesta:</strong>{' '}
-                  <span className={item.result ? 'text-success' : 'text-danger'}>
-                    {item.selected}
-                  </span>
-                  <br />
-                  {!item.result && (
-                    <>
-                      <strong>Respuesta correcta:</strong> {item.correct}
-                    </>
-                  )}
-                </Card.Text>
-                <Alert variant={item.result ? 'success' : 'danger'} className="mt-2">
-                  {item.result ? '✅ Correcta' : '❌ Incorrecta'}
-                </Alert>
-              </Card.Body>
-            </Card>
-          ))
+          <>
+            <Alert variant="info" className="text-center">
+              <strong>Puntuación total:</strong> {score} / {maxScore}
+            </Alert>
+            {results.map((item, index) => (
+              <Card
+                key={index}
+                className={`mb-3 border ${
+                  item.result ? 'border-success' : 'border-danger'
+                }`}
+              >
+                <Card.Body>
+                  <Card.Title>
+                    Pregunta {index + 1}: {item.question}
+                  </Card.Title>
+                  <Card.Text>
+                    <strong>Tu respuesta:</strong>{' '}
+                    <span className={item.result ? 'text-success' : 'text-danger'}>
+                      {item.selected}
+                    </span>
+                    <br />
+                    {!item.result && (
+                      <>
+                        <strong>Respuesta correcta:</strong> {item.correct}
+                        <br />
+                      </>
+                    )}
+                    <strong>Puntaje:</strong> {item.result ? item.value || 1 : 0}
+                  </Card.Text>
+                  <Alert variant={item.result ? 'success' : 'danger'} className="mt-2">
+                    {item.result ? '✅ Correcta' : '❌ Incorrecta'}
+                  </Alert>
+                </Card.Body>
+              </Card>
+            ))}
+          </>
         )}
         {!loading && !error && (
           <div className="text-center mt-4">
