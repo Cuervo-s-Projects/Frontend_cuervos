@@ -109,7 +109,12 @@ export default function VideoPage() {
               📄 Crear Formulario
             </button>
           )}
-          <a href="/quiz" className="btn btn-success btn-lg mt-3">Resolver formulario</a>
+          <button
+            className="btn btn-success btn-lg mt-3"
+            onClick={() => navigate(`/quiz/${video._id}`)}
+          >
+            Resolver formulario
+          </button>
         </div>
 
         {/* Comentarios */}

@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 import { useUnsavedChangesWarning } from '../hooks/useUnsavedChangesWarning';
 
+
 const FormCreatePage = () => {
   const { videoId } = useParams();
   const navigate = useNavigate();
@@ -237,21 +238,30 @@ const FormCreatePage = () => {
       return;
     }
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('No has iniciado sesión');
+      return;
+    }
+
     const data = {
       title: title.trim(),
       video_id: videoId,
       questions: questions.map(q => ({
-        ...q,
-        text: q.text.trim(),
+        question: q.text.trim(),
         options: q.options.filter(opt => opt.trim()),
-        correctAnswer: q.correctAnswer.trim()
+        correct: q.correctAnswer.trim(),
+        value: q.value || 1
       }))
     };
 
     try {
-      const response = await fetch('/api/quizzes', {
+      const response = await fetch('http://localhost:5002/api/class/create', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(data)
       });
 
@@ -269,6 +279,7 @@ const FormCreatePage = () => {
       toast.error('Error de red al guardar');
     }
   };
+
 
   const handleClearDraft = () => {
     if (window.confirm('¿Estás seguro de que quieres limpiar el borrador? Se perderán todos los datos.')) {

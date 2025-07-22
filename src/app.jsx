@@ -19,7 +19,7 @@ function App() {
                 <Route path="/upload" element={<UploadPage />} />
                 <Route path="/video/:id" element={<VideoPage />} />
                 <Route path="/search" element={<SearchResultsPage />} />
-                <Route path="/quiz" element={<QuizPage />} />
+                <Route path="/quiz/:videoId" element={<QuizPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/quiz/create/:videoId" element={<FormCreatePage />} />
             </Routes>
