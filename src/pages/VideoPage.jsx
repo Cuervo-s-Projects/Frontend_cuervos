@@ -103,19 +103,30 @@ export default function VideoPage() {
         <p className="text-muted">{video.description}</p>
 
         {/* Botones de formularios */}
-        <div className="mb-4 d-flex gap-3">
+        <div className="mb-4 d-flex flex-column flex-sm-row gap-3">
           {isUploader && (
             <button className="btn btn-outline-primary" onClick={handleCreateQuiz}>
               📄 Crear Formulario
             </button>
           )}
-          <button
-            className="btn btn-success btn-lg mt-3"
-            onClick={() => navigate(`/quiz/${video._id}`)}
-          >
-            Resolver formulario
-          </button>
+          {authenticatedUserId ? (
+            <button
+              className="btn btn-success btn-lg"
+              onClick={() => navigate(`/quiz/${video._id}`)}
+            >
+              Resolver formulario
+            </button>
+          ) : (
+            <button
+              className="btn btn-outline-secondary btn-lg"
+              disabled
+              title="Inicia sesión para resolver el formulario"
+            >
+              🔒 Resolver formulario (requiere login)
+            </button>
+          )}
         </div>
+
 
         {/* Comentarios */}
         <div className="card p-3 mb-5">
