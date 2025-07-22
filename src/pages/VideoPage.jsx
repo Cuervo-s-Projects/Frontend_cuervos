@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import UserTopMenu from '../components/UserTopMenu';
 
 export default function VideoPage() {
   const { id } = useParams();
   const [video, setVideo] = useState(null);
   const [uploader, setUploader] = useState('');
+  const [authenticatedUserId, setAuthenticatedUserId] = useState('');
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchVideoAndUploader = async () => {
+    const fetchData = async () => {
       try {
-        // Obtener el video por su ID
+        // Obtener video
         const res = await fetch(`http://localhost:5001/videos/${id}`);
         const data = await res.json();
         setVideo(data);
 
-        // Buscar el nombre de usuario usando el user_id del video
+        // Obtener username del uploader
         if (data.user_id) {
           const userRes = await fetch('http://localhost:5000/api/username', {
             method: 'POST',
@@ -26,28 +28,38 @@ export default function VideoPage() {
             body: JSON.stringify({ id: data.user_id }),
           });
 
-          if (userRes.ok) {
-            const userData = await userRes.json();
-            setUploader(userData.username || 'Usuario desconocido');
-          } else {
-            setUploader('Usuario desconocido');
+          const userData = await userRes.json();
+          setUploader(userData.username || 'Usuario desconocido');
+        }
+
+        // Obtener perfil del usuario autenticado
+        const token = localStorage.getItem('token');
+        if (token) {
+          const profileRes = await fetch('http://localhost:5000/api/profile', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
+          if (profileRes.ok) {
+            const profileData = await profileRes.json();
+            setAuthenticatedUserId(profileData._id);
           }
         }
 
-        // Buscar videos relacionados por título y etiquetas
+        // Buscar videos relacionados
         const searchTerms = [data.title, ...(data.tags || [])].join(' ');
         const searchRes = await fetch(`http://localhost:5001/videos/search?q=${encodeURIComponent(searchTerms)}`);
         const searchData = await searchRes.json();
-        const related = searchData.videos
-          .filter(v => v._id !== id)
-          .slice(0, 10);
+        const related = searchData.videos.filter(v => v._id !== id).slice(0, 10);
         setRelatedVideos(related);
       } catch (err) {
-        console.error('Error al cargar video o usuario:', err);
+        console.error('Error al cargar video o perfil:', err);
       }
     };
 
-    fetchVideoAndUploader();
+    fetchData();
   }, [id]);
 
   const handleCommentSubmit = (e) => {
@@ -58,14 +70,19 @@ export default function VideoPage() {
     }
   };
 
+  const handleCreateQuiz = () => {
+    navigate(`/quiz/create/${id}`); // o como esté configurada tu ruta
+  };
+
   if (!video) return <p className="text-center py-5">Cargando video...</p>;
+
+  const isUploader = authenticatedUserId === video.user_id;
 
   return (
     <>
       <UserTopMenu />
-
       <div className="container py-5">
-        {/* Video principal */}
+        {/* Video */}
         <div className="mb-4">
           <video controls width="100%" className="rounded shadow">
             <source src={`http://localhost:5001/download/${video.file_id}`} type={video.content_type} />
@@ -75,25 +92,41 @@ export default function VideoPage() {
 
         {/* Botón de descarga */}
         <div className="mb-4">
-          <a
-            href={`http://localhost:5001/download/${video.file_id}`}
-            download={video.filename}
-            className="btn btn-outline-secondary"
-          >
+          <a href={`http://localhost:5001/download/${video.file_id}`} download={video.filename} className="btn btn-outline-secondary">
             Descargar video
           </a>
         </div>
 
-        {/* Título, autor y descripción */}
+        {/* Título y descripción */}
         <h2 className="fw-bold text-success">{video.title}</h2>
         <p className="text-muted mb-1"><strong>Subido por:</strong> {uploader}</p>
         <p className="text-muted">{video.description}</p>
 
         {/* Botones de formularios */}
-        <div className="mb-4 d-flex gap-3">
-          <button className="btn btn-outline-primary">📄 Crear Formulario</button>
-          <a href="/quiz" className="btn btn-success btn-lg mt-3">Resolver formulario</a>
+        <div className="mb-4 d-flex flex-column flex-sm-row gap-3">
+          {isUploader && (
+            <button className="btn btn-outline-primary" onClick={handleCreateQuiz}>
+              📄 Crear Formulario
+            </button>
+          )}
+          {authenticatedUserId ? (
+            <button
+              className="btn btn-success btn-lg"
+              onClick={() => navigate(`/quiz/${video._id}`)}
+            >
+              Resolver formulario
+            </button>
+          ) : (
+            <button
+              className="btn btn-outline-secondary btn-lg"
+              disabled
+              title="Inicia sesión para resolver el formulario"
+            >
+              🔒 Resolver formulario (requiere login)
+            </button>
+          )}
         </div>
+
 
         {/* Comentarios */}
         <div className="card p-3 mb-5">
