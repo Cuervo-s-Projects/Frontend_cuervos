@@ -32,7 +32,7 @@ Aplicación web plataforma de video online. Desarrollada con React.js y Vite, di
 ### Frontend
 - **React 18** (Hooks API)
 - **Vite** (Bundler y servidor)
-- **TailwindCSS** (Estilos)
+- **Mentor** (Estilos)
 - **React Router v6** (Navegación)
 
 ### Herramientas
