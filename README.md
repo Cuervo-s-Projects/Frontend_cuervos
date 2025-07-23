@@ -61,13 +61,6 @@ cd Frontend_cuervos
 ```bash
 npm install
 ```
----
-
-## Configurar variables de entorno
-```bash
-cp .env.example .env
-```
-## Editar .env según necesidades
 
 ---
 
