@@ -7,6 +7,10 @@ Aplicación web plataforma de video online. Desarrollada con React.js y Vite, di
 
 ## 🚀 Características Principales
 
+### 🎯 Sistema de Aprendizaje
+- Cuestionarios interactivos
+- Biblioteca de videos educativos organizados
+
 ### Interfaz de Usuario
 - Diseño responsive con Bootstrap Mentor
 - Navegación fluida con React Router
@@ -77,7 +81,25 @@ VITE_DEBUG_MODE=false
 ---
 
 ## 🏗 Estructura del Proyecto
-![Arquitectura](arch.png)
+frontend_cuervos/
+├── public/                # Assets estáticos
+│   ├── videos/            # Contenido multimedia
+│   └── locales/           # Archivos de internacionalización
+├── src/
+│   ├── api/               # Llamadas a API
+│   ├── components/        # Componentes reutilizables
+│   ├── contexts/          # Contextos globales
+│   ├── features/          # Lógica de features
+│   │   ├── quiz/          # Sistema de cuestionarios
+│   │   ├── video/         # Gestión de videos
+│   │   └── search/        # Búsqueda y recomendaciones
+│   ├── hooks/             # Custom hooks
+│   ├── pages/             # Vistas principales
+│   ├── styles/            # Estilos globales
+│   ├── types/             # Definiciones TypeScript
+│   ├── utils/             # Funciones utilitarias
+│   ├── App.tsx            # Componente raíz
+│   └── main.tsx           # Punto de entrada
 
 ---
 
