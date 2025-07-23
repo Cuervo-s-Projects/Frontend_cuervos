@@ -81,6 +81,7 @@ VITE_DEBUG_MODE=false
 ---
 
 ## 🏗 Estructura del Proyecto
+```
 frontend_cuervos/
 ├── public/                # Assets estáticos
 │   ├── videos/            # Contenido multimedia
@@ -100,6 +101,7 @@ frontend_cuervos/
 │   ├── utils/             # Funciones utilitarias
 │   ├── App.tsx            # Componente raíz
 │   └── main.tsx           # Punto de entrada
+```
 
 ---
 
