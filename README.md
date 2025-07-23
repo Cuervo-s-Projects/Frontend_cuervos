@@ -13,7 +13,7 @@ Aplicación web plataforma de video online. Desarrollada con React.js y Vite, di
 - Diseño responsive con Bootstrap Mentor
 - Navegación fluida con React Router
 - Animaciones con Framer Motion
-- Temas claro/oscuro
+- Tema claro
 
 ### Integraciones
 - Conexión con API's (Video_Service, Login_backend_cuervos, Questionary_Service, TestingService)
