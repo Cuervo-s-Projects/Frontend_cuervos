@@ -85,18 +85,6 @@ VITE_DEBUG_MODE=false
 
 ---
 
-## 🧪 Testing
-### Ejecutar pruebas unitarias:
-```bash
-npm test
-```
-### Generar reporte de cobertura:
-```bash
-npm run test:coverage
-```
-
----
-
 ## 🏗 Estructura del Proyecto
 ![Arquitectura](arch.png)
 
