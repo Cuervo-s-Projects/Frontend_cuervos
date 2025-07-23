@@ -12,52 +12,28 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Nuevo componente
+- Nueva página de resultados de cuestionarios con sistema de puntuación 
+- Funcionalidad de descarga de videos (#4)
+- Página para resolver cuestionarios interactivos
+- Sistema completo de búsqueda y recomendaciones de videos 
 
 ### Changed
-- Mejorado el rendimiento
-- Actualizadas dependencias:
-  - react-router-dom v6.15.0 → v6.16.0
-  - axios v1.4.0 → v1.5.0
+- Mejoras continuas en la documentación (README) 
+- Refactorización del componente SignupForm 
 
-### Fixed
-- Corregido error
-
-## [1.2.0] - 2023-10-15
+## [1.1.0] - 2025-07-22
 
 ### Added
-- Implementación completa del sistema de autenticación
-- Nuevas páginas:
-  - Dashboard de usuario
-  - Configuración de perfil
-- Integración con APIs video y questionario
-
-### Changed
-- Reestructuración del sistema de rutas
-- Optimización del bundle de producción
-- Mejoras en la documentación del proyecto
+- Nueva interfaz para cuestionarios 
+- Componente Video Grid para presentación de contenido 
+- Página dedicada para visualización de videos
 
 ### Fixed
-- Corrección de vulnerabilidades de seguridad
-- Solucionado problema de memoria
+- Correcciones menores en la navegación entre páginas
 
-## [1.1.0] - 2023-08-20
+## [1.0.0] - 2025-07-11
 
 ### Added
-- Primer release público
-- Sistema básico de navegación
-- Integración inicial con API backend
-- Componentes base:
-  - Header
-  - Footer
-  - Sistema de notificaciones
-
-### Changed
-- Migración de CRA a Vite
-- Actualización a React 18
-
-## [1.0.0] - 2023-05-10
-
-- Versión inicial del proyecto
-- Estructura básica configurada
-- Configuración inicial de CI/CD
+- Implementación inicial del buscador
+- Página de registro (SignupForm)
+- Estructura base del proyecto 
