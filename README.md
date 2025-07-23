@@ -1,4 +1,4 @@
-[Portada](portada.jpg)
+![Portada](portada.jpg)
 # Frontend Cuervos 🦅
 
 Aplicación web plataforma de video online. Desarrollada con React.js y Vite, diseñada para ofrecer servicio de video a poblacion con dificultades de acceso.
@@ -98,17 +98,17 @@ npm run test:coverage
 ---
 
 ## 🏗 Estructura del Proyecto
-[Arquitectura](arch.jpg)
+![Arquitectura](arch.png)
 
 ---
 
 ## 📬 Contacto
-Jacel Thomás Enciso Pinzón - [@slendrac123](https://github.com/slendrac123) - Correo: jencisop@unal.edu.co
-Daniel Santiago Delgado Pinilla - [@ddelgadopi](https://github.com/ddelgadopi) - Correo: ddelgadopi@unal.edu.co
-Juan David Ramírez López - [@Juramirezlop](https://github.com/Juramirezlop) - Correo: juramirezlop@unal.edu.co
-Jesus David Giraldo Gomez - [@gdavidg-27](https://github.com/gdavidg-27) - Correo: jedgiraldogo@unal.edu.co
-Cristian Liu Chois Amaya - [@cchois](https://github.com/cchois) - Correo: cchois@unal.edu.co
-Iván David Molina Leguízamo - [@ivdmolinale](https://gitlab.com/ivdmolinale) - Correo: ivdmolinale@unal.edu.co
+- Jacel Thomás Enciso Pinzón - [@slendrac123](https://github.com/slendrac123) - Correo: jencisop@unal.edu.co
+- Daniel Santiago Delgado Pinilla - [@ddelgadopi](https://github.com/ddelgadopi) - Correo: ddelgadopi@unal.edu.co
+- Juan David Ramírez López - [@Juramirezlop](https://github.com/Juramirezlop) - Correo: juramirezlop@unal.edu.co
+- Jesus David Giraldo Gomez - [@gdavidg-27](https://github.com/gdavidg-27) - Correo: jedgiraldogo@unal.edu.co
+- Cristian Liu Chois Amaya - [@cchois](https://github.com/cchois) - Correo: cchois@unal.edu.co
+- Iván David Molina Leguízamo - [@ivdmolinale](https://gitlab.com/ivdmolinale) - Correo: ivdmolinale@unal.edu.co
 
 Proyecto: [https://github.com/Cuervo-s-Projects/Frontend_cuervos](https://github.com/Cuervo-s-Projects/Frontend_cuervos)
 
