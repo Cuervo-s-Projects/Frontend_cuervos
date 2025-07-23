@@ -10,7 +10,7 @@ Aplicación web plataforma de video online. Desarrollada con React.js y Vite, di
 ## 🚀 Características Principales
 
 ### Interfaz de Usuario
-- Diseño responsive con TailwindCSS
+- Diseño responsive con Bootstrap Mentor
 - Navegación fluida con React Router
 - Animaciones con Framer Motion
 - Temas claro/oscuro
