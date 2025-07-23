@@ -1,9 +1,7 @@
-![Portada](portada.jpg)
+![Portada](portada_cuervos.jpg)
 # Frontend Cuervos 🦅
 
 Aplicación web plataforma de video online. Desarrollada con React.js y Vite, diseñada para ofrecer servicio de video a poblacion con dificultades de acceso.
-
-![Banner](src/assets/clever_crow.png)
 
 ---
 
