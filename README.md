@@ -50,28 +50,28 @@ Requisitos previos:
 
 ---
 
-# Clonar repositorio
+## Clonar repositorio
 ```bash
 git clone https://github.com/Cuervo-s-Projects/Frontend_cuervos.git
 cd Frontend_cuervos
 ```
 ---
 
-# Instalar dependencias
+## Instalar dependencias
 ```bash
 npm install
 ```
 ---
 
-# Configurar variables de entorno
+## Configurar variables de entorno
 ```bash
 cp .env.example .env
 ```
-# Editar .env según necesidades
+## Editar .env según necesidades
 
 ---
 
-# Iniciar servidor de desarrollo
+## Iniciar servidor de desarrollo
 ```bash
 npm run dev
 ```
@@ -86,11 +86,11 @@ VITE_DEBUG_MODE=false
 ---
 
 ## 🧪 Testing
-# Ejecutar pruebas unitarias:
+### Ejecutar pruebas unitarias:
 ```bash
 npm test
 ```
-# Generar reporte de cobertura:
+### Generar reporte de cobertura:
 ```bash
 npm run test:coverage
 ```
